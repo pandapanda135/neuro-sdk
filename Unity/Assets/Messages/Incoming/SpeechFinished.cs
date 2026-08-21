@@ -29,13 +29,12 @@ namespace NeuroSdk.Messages.Incoming
 			out ParsedData? parsedData)
 		{
 			parsedData = null;
+			
+			if (messageData.Data is not JObject root) return ExecutionResult.Success();
 
-			if (messageData.Data is not JObject root || root["data"] is not JObject data)
-				return ExecutionResult.Success();
-
-			bool isFinal = data.Value<bool>("isFinal");
-			bool? cancelled = data.Value<bool?>("cancelled");
-			string? reason = data.Value<string?>("reason");
+			bool isFinal = root.Value<bool>("isFinal");
+			bool? cancelled = root.Value<bool?>("cancelled");
+			string? reason = root.Value<string?>("reason");
 
 			parsedData = new ParsedData(isFinal, cancelled, reason);
 			return ExecutionResult.Success();

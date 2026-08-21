@@ -12,7 +12,7 @@ After the websocket startup acknowledgement arrives, the `Websocket` autoload ex
 
 ## Handling Speaking State
 
-Once a `speech_finished` message has been sent, the `Websocket` autoload sets `is_finished`, `speech_cancelled` and `speech_reason`. You can also connect to `Websocket.speech_finished` to react to messages as they are sent. If you need active monitoring of the state, this is the recommended approach, as multiple messages can be sent during a single response.
+Once a `speech_finished` message has been sent, the `Websocket` autoload sets `is_final`, `speech_cancelled` and `speech_reason`. You can also connect to `Websocket.speech_finished` to react to messages as they are sent. If you need active monitoring of the state, this is the recommended approach, as multiple messages can be sent during a single response.
 
 ## Voice Chat
 

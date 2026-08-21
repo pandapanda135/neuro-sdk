@@ -237,7 +237,10 @@ namespace NeuroSdk.Websocket
         public void SetSpeechFinished(SpeechFinishedResult result)
         {
             SpeechFinished = result;
-            onSpeechFinished?.Invoke(result);
+            if (SpeechFinished.IsFinal)
+            {
+                onSpeechFinished?.Invoke(result);
+            }
         }
 
         [Il2CppHide]

@@ -5,7 +5,7 @@ signal connected
 signal connection_failed(error: Error)
 signal disconnected(code: int)
 signal character_changed(character_id: String, display_name: String)
-signal speech_finished(is_finished: bool, cancelled: bool, reason: String)
+signal speech_finished(is_final: bool, cancelled: bool, reason: String)
 
 const POLL_INTERVAL := 1.0 / 30.0
 const RECONNECT_INTERVAL := 3.0
@@ -140,7 +140,8 @@ func set_speech_finished(new_final: bool, new_cancelled: bool, new_reason: Strin
 	is_final = new_final
 	speech_cancelled = new_cancelled
 	speech_reason = new_reason
-	speech_finished.emit(is_final, speech_cancelled, speech_reason)
+	if is_final:
+		speech_finished.emit(is_final, speech_cancelled, speech_reason)
 
 
 func send_immediate(message: OutgoingMessage) -> void:
